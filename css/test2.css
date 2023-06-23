@@ -1,0 +1,13 @@
+.wrapper{
+  max-width: 1200px;
+}
+.wrapper .carousel{
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 0px;
+}
+.carousel img{
+  height: 340px;
+  object-fit: cover;
+  
+}
