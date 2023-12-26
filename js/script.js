@@ -35,13 +35,41 @@ const elementCache2 = document.querySelectorAll('.cache2');
 elementCache2.forEach((el) => observe2.observe(el));
 elementCache.forEach((el) => observe.observe(el));
 /* NAV */
+const hamburgerMenu = document.getElementById('menu2');
+const mainMenu = document.getElementById('menu1');
+
+function toggleMainMenu() {
+  mainMenu.classList.toggle('active');
+  mainMenu.classList.remove("menu1");
+  mainMenu.classList.add("menu3");
+}
+
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+// Ajouter l'écouteur d'événement approprié en fonction de l'appareil
+if (isIOS) {
+  hamburgerMenu.addEventListener('touchstart', toggleMainMenu);
+} else {
+  hamburgerMenu.addEventListener('click', toggleMainMenu);
+}
+function toggleMenu() {
+  if (window.innerWidth >= 580) {
+    mainMenu.classList.remove('active');
+    mainMenu.classList.remove("menu3");
+    mainMenu.classList.add("menu1");
+  }
+}
+
+window.addEventListener('resize', toggleMenu);
+toggleMenu();
+
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
   var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos > currentScrollPos) {
-    document.querySelector("nav").style.top = "0";
-  } else {
+  if (prevScrollpos < currentScrollPos && window.innerWidth >= 580) {
     document.querySelector("nav").style.top = "-100px";
+  } else {
+    document.querySelector("nav").style.top = "0px";
   }
   prevScrollpos = currentScrollPos;
 }
@@ -50,7 +78,6 @@ const currentPageUrl = window.location.href;
 
 const accueilButton = document.getElementById('accueil');
 const prestationsButton = document.getElementById("prestations");
-const realisationsButton = document.getElementById("realisations");
 const contactButton = document.getElementById("contact");
 
 
